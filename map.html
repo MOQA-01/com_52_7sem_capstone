@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geospatial Map - Jal Jeevan Mission</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .map-container {
+            position: relative;
+            height: calc(100vh - 80px);
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        .map-controls {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .control-panel {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 300px;
+        }
+
+        .control-panel h3 {
+            margin: 0 0 15px 0;
+            font-size: 16px;
+            color: var(--text-primary);
+        }
+
+        .layer-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .layer-toggle:hover {
+            background: var(--bg-primary);
+        }
+
+        .layer-toggle input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .layer-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .layer-icon {
+            font-size: 18px;
+        }
+
+        .search-control {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-control input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+        }
+
+        .legend {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            max-width: 250px;
+        }
+
+        .legend h4 {
+            margin: 0 0 15px 0;
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .legend-line {
+            width: 20px;
+            height: 3px;
+        }
+
+        .action-buttons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            display: flex;
+            gap: 10px;
+        }
+
+        .action-btn-map {
+            background: white;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            font-size: 13px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .action-btn-map:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .leaflet-popup-content-wrapper {
+            border-radius: 12px;
+            padding: 0;
+        }
+
+        .leaflet-popup-content {
+            margin: 0;
+            min-width: 200px;
+        }
+
+        .popup-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .popup-header h4 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+        }
+
+        .popup-header p {
+            margin: 0;
+            font-size: 12px;
+            opacity: 0.9;
+        }
+
+        .popup-body {
+            padding: 15px;
+        }
+
+        .popup-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 13px;
+        }
+
+        .popup-row:last-child {
+            border-bottom: none;
+        }
+
+        .popup-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .popup-value {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .map-controls {
+                top: 10px;
+                left: 10px;
+            }
+
+            .control-panel {
+                max-width: 250px;
+            }
+
+            .legend {
+                bottom: 10px;
+                right: 10px;
+                max-width: 200px;
+            }
+
+            .action-buttons {
+                top: 10px;
+                right: 10px;
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-tint"></i>
+                    <div class="sidebar-logo-text">
+                        <h2>Jal Jeevan</h2>
+                        <p>Water Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Main Menu</div>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-item-text">Dashboard</span>
+                </a>
+                <a href="map.html" class="nav-item active">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span class="nav-item-text">Geospatial Map</span>
+                </a>
+                <a href="iot-monitoring.html" class="nav-item">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span class="nav-item-text">IoT Monitoring</span>
+                    <span class="nav-badge">12</span>
+                </a>
+                <a href="grievances.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span class="nav-item-text">Grievances</span>
+                    <span class="nav-badge">234</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="nav-item-text">Analytics</span>
+                </a>
+
+                <div class="nav-section-title">Quick Access</div>
+                <a href="citizen-portal.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-item-text">Citizen Portal</span>
+                </a>
+
+                <div class="nav-section-title">Information</div>
+                <a href="about.html" class="nav-item">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="nav-item-text">About Project</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navbar -->
+            <nav class="top-navbar">
+                <div class="navbar-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Geospatial Asset Map</h1>
+                </div>
+                <div class="navbar-right">
+                    <button class="navbar-icon" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">12</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">AD</div>
+                        <div class="user-info">
+                            <div class="user-name" id="userName">Admin User</div>
+                            <div class="user-role" id="userRole">Administrator</div>
+                        </div>
+                    </div>
+                    <button class="navbar-icon" onclick="logout()" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Map Container -->
+            <div class="map-container">
+                <div id="map"></div>
+
+                <!-- Map Controls -->
+                <div class="map-controls">
+                    <div class="search-control">
+                        <input type="text" id="mapSearch" placeholder="Search assets by ID or name...">
+                    </div>
+
+                    <div class="control-panel">
+                        <h3><i class="fas fa-layer-group"></i> Layer Controls</h3>
+                        <div class="layer-toggle">
+                            <div class="layer-info">
+                                <i class="fas fa-circle layer-icon" style="color: #3b82f6;"></i>
+                                <span>Pipelines</span>
+                            </div>
+                            <input type="checkbox" id="layerPipelines" checked>
+                        </div>
+                        <div class="layer-toggle">
+                            <div class="layer-info">
+                                <i class="fas fa-database layer-icon" style="color: #10b981;"></i>
+                                <span>Storage Tanks</span>
+                            </div>
+                            <input type="checkbox" id="layerTanks" checked>
+                        </div>
+                        <div class="layer-toggle">
+                            <div class="layer-info">
+                                <i class="fas fa-pump layer-icon" style="color: #f59e0b;"></i>
+                                <span>Pumping Stations</span>
+                            </div>
+                            <input type="checkbox" id="layerPumps" checked>
+                        </div>
+                        <div class="layer-toggle">
+                            <div class="layer-info">
+                                <i class="fas fa-water layer-icon" style="color: #06b6d4;"></i>
+                                <span>Water Sources</span>
+                            </div>
+                            <input type="checkbox" id="layerSources" checked>
+                        </div>
+                        <div class="layer-toggle">
+                            <div class="layer-info">
+                                <i class="fas fa-exclamation-circle layer-icon" style="color: #ef4444;"></i>
+                                <span>Complaints</span>
+                            </div>
+                            <input type="checkbox" id="layerComplaints" checked>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="action-buttons">
+                    <button class="action-btn-map" onclick="addNewAsset()">
+                        <i class="fas fa-plus"></i> Add Asset
+                    </button>
+                    <button class="action-btn-map" onclick="measureDistance()">
+                        <i class="fas fa-ruler"></i> Measure
+                    </button>
+                    <button class="action-btn-map" onclick="exportMap()">
+                        <i class="fas fa-download"></i> Export
+                    </button>
+                </div>
+
+                <!-- Legend -->
+                <div class="legend">
+                    <h4><i class="fas fa-info-circle"></i> Legend</h4>
+                    <div class="legend-item">
+                        <div class="legend-line" style="background: #3b82f6;"></div>
+                        <span>Pipelines</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #10b981;"></div>
+                        <span>Storage Tanks</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f59e0b;"></div>
+                        <span>Pumping Stations</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #06b6d4;"></div>
+                        <span>Water Sources</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #ef4444;"></div>
+                        <span>Complaints</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>

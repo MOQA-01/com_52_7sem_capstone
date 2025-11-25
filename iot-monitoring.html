@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Data Test - Jal Jeevan Mission</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #3b82f6;
+            border-bottom: 3px solid #3b82f6;
+            padding-bottom: 10px;
+        }
+        .status {
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d1fae5;
+            color: #065f46;
+            border-left: 4px solid #10b981;
+        }
+        .error {
+            background: #fee2e2;
+            color: #991b1b;
+            border-left: 4px solid #ef4444;
+        }
+        .info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-left: 4px solid #3b82f6;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+        }
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        button {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            margin: 5px;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2563eb;
+        }
+        button.danger {
+            background: #ef4444;
+        }
+        button.danger:hover {
+            background: #dc2626;
+        }
+        .sensor-list {
+            max-height: 400px;
+            overflow-y: auto;
+            margin: 20px 0;
+            border: 1px solid #e5e7eb;
+            border-radius: 8px;
+        }
+        .sensor-item {
+            padding: 15px;
+            border-bottom: 1px solid #e5e7eb;
+            display: grid;
+            grid-template-columns: 100px 150px 1fr 120px 100px;
+            gap: 15px;
+            align-items: center;
+        }
+        .sensor-item:hover {
+            background: #f9fafb;
+        }
+        .badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            text-align: center;
+        }
+        .badge-normal {
+            background: #d1fae5;
+            color: #065f46;
+        }
+        .badge-warning {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        .badge-critical {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>IoT Sensor Data Test Page</h1>
+
+        <div id="statusMessage" class="status info">
+            Loading sensor data...
+        </div>
+
+        <div class="stats" id="statsContainer">
+            <div class="stat-card">
+                <div class="stat-value" id="totalSensors">-</div>
+                <div class="stat-label">Total Sensors</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="normalSensors">-</div>
+                <div class="stat-label">Normal Status</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="warningSensors">-</div>
+                <div class="stat-label">Warning Status</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="criticalSensors">-</div>
+                <div class="stat-label">Critical Status</div>
+            </div>
+        </div>
+
+        <div>
+            <button onclick="loadData()">Refresh Data</button>
+            <button onclick="viewSensorList()">View All Sensors</button>
+            <button onclick="resetJJMData()" class="danger">Reset to Default Data</button>
+            
+        </div>
+
+        <div id="sensorListContainer" style="display: none;">
+            <h2>Sensor List (First 50)</h2>
+            <div class="sensor-list" id="sensorList"></div>
+        </div>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script>
+        function loadData() {
+            const statusDiv = document.getElementById('statusMessage');
+
+            try {
+                const sensors = DataManager.getSensors();
+
+                if (sensors.length === 0) {
+                    statusDiv.className = 'status error';
+                    statusDiv.innerHTML = '❌ No sensors found! Click "Reset to Default Data" to load dummy data.';
+                    return;
+                }
+
+                // Calculate statistics
+                const total = sensors.length;
+                const normal = sensors.filter(s => s.status === 'normal').length;
+                const warning = sensors.filter(s => s.status === 'warning').length;
+                const critical = sensors.filter(s => s.status === 'critical').length;
+
+                // Update stats
+                document.getElementById('totalSensors').textContent = total;
+                document.getElementById('normalSensors').textContent = normal;
+                document.getElementById('warningSensors').textContent = warning;
+                document.getElementById('criticalSensors').textContent = critical;
+
+                // Show success message
+                statusDiv.className = 'status success';
+                statusDiv.innerHTML = `✓ Successfully loaded ${total} sensors!<br><small>Normal: ${normal}, Warning: ${warning}, Critical: ${critical}</small>`;
+
+                console.log('Loaded sensors:', sensors);
+            } catch (error) {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '❌ Error loading sensor data: ' + error.message;
+                console.error('Error:', error);
+            }
+        }
+
+        function viewSensorList() {
+            const container = document.getElementById('sensorListContainer');
+            const list = document.getElementById('sensorList');
+
+            const sensors = DataManager.getSensors().slice(0, 50); // First 50 sensors
+
+            if (sensors.length === 0) {
+                list.innerHTML = '<div style="padding: 20px; text-align: center;">No sensors available</div>';
+                container.style.display = 'block';
+                return;
+            }
+
+            list.innerHTML = sensors.map(sensor => `
+                <div class="sensor-item">
+                    <div><strong>${sensor.id}</strong></div>
+                    <div>${sensor.type.toUpperCase()}</div>
+                    <div>${sensor.location}</div>
+                    <div><strong>${sensor.current_value} ${sensor.unit}</strong></div>
+                    <div><span class="badge badge-${sensor.status}">${sensor.status.toUpperCase()}</span></div>
+                </div>
+            `).join('');
+
+            container.style.display = 'block';
+        }
+
+        // Load data on page load
+        window.addEventListener('DOMContentLoaded', loadData);
+    </script>
+</body>
+</html>

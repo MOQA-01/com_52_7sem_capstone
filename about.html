@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - Jal Jeevan Mission</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .about-hero {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .about-hero h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .about-hero p {
+            font-size: 20px;
+            opacity: 0.95;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-content {
+            padding: 60px 0;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .section-title i {
+            color: var(--primary-color);
+        }
+
+        .objectives-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .objective-card {
+            background: white;
+            padding: 30px;
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-md);
+            border-left: 4px solid var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .objective-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .objective-card h3 {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .objective-card p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .features-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .feature-item {
+            background: var(--bg-primary);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .team-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+        }
+
+        .team-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .team-header {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .team-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 700;
+            border: 3px solid white;
+        }
+
+        .team-info {
+            padding: 25px;
+        }
+
+        .team-name {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 5px;
+        }
+
+        .team-role {
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .team-department {
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .team-contact {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-top: 10px;
+        }
+
+        .stats-banner {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            color: white;
+            padding: 60px 0;
+            margin: 60px 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+        }
+
+        .stat-box {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            flex-direction: row;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 25px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-date {
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            transform: translateX(-50%);
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            border: 3px solid white;
+            box-shadow: 0 0 0 3px var(--primary-color);
+            z-index: 1;
+        }
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 32px;
+            }
+
+            .about-hero p {
+                font-size: 16px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-item {
+                flex-direction: column !important;
+                padding-left: 40px;
+            }
+
+            .timeline-marker {
+                left: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-tint"></i>
+                    <div class="sidebar-logo-text">
+                        <h2>Jal Jeevan</h2>
+                        <p>Water Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Main Menu</div>
+                <a href="dashboard.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-item-text">Dashboard</span>
+                </a>
+                <a href="map.html" class="nav-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span class="nav-item-text">Geospatial Map</span>
+                </a>
+                <a href="iot-monitoring.html" class="nav-item">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span class="nav-item-text">IoT Monitoring</span>
+                    <span class="nav-badge">12</span>
+                </a>
+                <a href="grievances.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span class="nav-item-text">Grievances</span>
+                    <span class="nav-badge">234</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="nav-item-text">Analytics</span>
+                </a>
+
+                <div class="nav-section-title">Information</div>
+                <a href="about.html" class="nav-item active">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="nav-item-text">About Project</span>
+                </a>
+                <a href="citizen-portal.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-item-text">Citizen Portal</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navbar -->
+            <nav class="top-navbar">
+                <div class="navbar-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">About Project</h1>
+                </div>
+                <div class="navbar-right">
+                    <button class="navbar-icon" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">12</span>
+                    </button>
+                    <div class="user-profile">
+                        <div class="user-avatar">AD</div>
+                        <div class="user-info">
+                            <div class="user-name" id="userName">Admin User</div>
+                            <div class="user-role" id="userRole">Administrator</div>
+                        </div>
+                    </div>
+                    <button class="navbar-icon" onclick="logout()" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Hero Section -->
+            <div class="about-hero">
+                <div class="container">
+                    <h1>Jal Jeevan Mission Platform</h1>
+                    <p>A Cost-Effective Integrated Platform for Rural Water Supply Network Management: Implementation and Performance Analysis</p>
+                </div>
+            </div>
+
+            <!-- About Content -->
+            <div class="about-content">
+                <div class="container">
+                    <!-- Project Overview -->
+                    <section class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-project-diagram"></i>
+                            Project Overview
+                        </h2>
+                        <div class="card" style="padding: 30px;">
+                            <p style="font-size: 16px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 20px;">
+                                Safe drinking water access is an important issue that challenges over 600 million people living in the developing world. To realize its objective,
+                                the Jal Jeevan Mission (JJM) promises to supply 29.6 billion USD to supply Functional Household Tap Connections (FHTC) to 150 million rural households by 2024.
+                            </p>
+                            <p style="font-size: 16px; line-height: 1.8; color: var(--text-secondary); margin-bottom: 20px;">
+                                This platform integrates IoT (Internet of Things) monitoring and grievance redressal into a seamless solution, built with PostgreSQL,
+                                PostGIS extensions for spatial data management, and MQTT protocol for real-time IoT data transmission.
+                            </p>
+                            <p style="font-size: 16px; line-height: 1.8; color: var(--text-secondary);">
+                                Our comprehensive approach enables real-time anomaly detection and integrates Isolation Forest techniques for precision in anomaly detection,
+                                achieving significant cost reduction (72% lower) and deployment efficiency (99.9% uptime) compared to commercial systems.
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Key Objectives -->
+                    <section class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-bullseye"></i>
+                            Key Objectives
+                        </h2>
+                        <div class="objectives-grid">
+                            <div class="objective-card">
+                                <h3><i class="fas fa-database"></i> Spatial Data Management</h3>
+                                <p>Validation of PostgreSQL with PostGIS for managing geospatial infrastructure data using R-tree spatial indexing to minimize query response times (down to 2.1%).</p>
+                            </div>
+                            <div class="objective-card">
+                                <h3><i class="fas fa-satellite-dish"></i> Real-time IoT Monitoring</h3>
+                                <p>Implementation and comparison of real-time anomaly detection algorithms achieving 94.2% precision using Isolation Forest technique.</p>
+                            </div>
+                            <div class="objective-card">
+                                <h3><i class="fas fa-microchip"></i> IoT Simulation</h3>
+                                <p>Development of an IoT Simulation Framework providing realistic testing with hardware cost savings and deployment efficiency analysis.</p>
+                            </div>
+                            <div class="objective-card">
+                                <h3><i class="fas fa-chart-line"></i> Performance Analysis</h3>
+                                <p>Detailed performance evaluation with 50,000+ users achieving 99.9% uptime and 1.3s sub-second query response times for spatial data.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Key Features -->
+                    <section class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-star"></i>
+                            Platform Features
+                        </h2>
+                        <div class="features-list">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--text-primary);">Geospatial Mapping</strong>
+                                    <p style="font-size: 13px; color: var(--text-secondary); margin: 5px 0 0 0;">
+                                        Interactive infrastructure mapping with PostGIS spatial queries
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-chart-area"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--text-primary);">Anomaly Detection</strong>
+                                    <p style="font-size: 13px; color: var(--text-secondary); margin: 5px 0 0 0;">
+                                        Real-time monitoring with 94.2% precision using Isolation Forest
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--text-primary);">Grievance Redressal</strong>
+                                    <p style="font-size: 13px; color: var(--text-secondary); margin: 5px 0 0 0;">
+                                        Streamlined complaint management with Service Level Agreements
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-network-wired"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--text-primary);">MQTT Protocol</strong>
+                                    <p style="font-size: 13px; color: var(--text-secondary); margin: 5px 0 0 0;">
+                                        Efficient IoT data transmission for real-time sensor monitoring
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-dollar-sign"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--text-primary);">Cost-Effective</strong>
+                                    <p style="font-size: 13px; color: var(--text-secondary); margin: 5px 0 0 0;">
+                                        72% lower cost compared to commercial systems
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-tachometer-alt"></i>
+                                </div>
+                                <div>
+                                    <strong style="color: var(--text-primary);">High Performance</strong>
+                                    <p style="font-size: 13px; color: var(--text-secondary); margin: 5px 0 0 0;">
+                                        99.9% uptime with 50,000 user deployment simulation
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Performance Stats Banner -->
+                    <div class="stats-banner">
+                        <div class="container">
+                            <h2 style="text-align: center; margin-bottom: 40px; font-size: 32px;">Performance Highlights</h2>
+                            <div class="stats-grid">
+                                <div class="stat-box">
+                                    <div class="stat-number">72%</div>
+                                    <div class="stat-label">Cost Reduction</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-number">94.2%</div>
+                                    <div class="stat-label">Anomaly Detection Precision</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-number">99.9%</div>
+                                    <div class="stat-label">System Uptime</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-number">50K+</div>
+                                    <div class="stat-label">Users Supported</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-number">1.3s</div>
+                                    <div class="stat-label">Query Response Time</div>
+                                </div>
+                                <div class="stat-box">
+                                    <div class="stat-number">2.1%</div>
+                                    <div class="stat-label">Spatial Query Optimization</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Research Team -->
+                    <section class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-users"></i>
+                            Research Team
+                        </h2>
+                        <div class="team-grid">
+
+                            <!-- Team Member 4 -->
+                            <div class="team-card">
+                                <div class="team-header">
+                                    <div class="team-avatar">VK</div>
+                                </div>
+                                <div class="team-info">
+                                    <div class="team-name">Dr. Vijay K</div>
+                                    <div class="team-role">Assistant Professor Senior Scale</div>
+                                    <div class="team-department">
+                                        Department of Computer Science and Engineering<br>
+                                        Presidency University<br>
+                                        Bengaluru, India
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Team Member 1 -->
+                            <div class="team-card">
+                                <div class="team-header">
+                                    <div class="team-avatar">MQ</div>
+                                </div>
+                                <div class="team-info">
+                                    <div class="team-name">Mohammed Qalandar Shah Quazi</div>
+                                    <div class="team-role">Lead Researcher</div>
+                                    <div class="team-department">
+                                        Department of Computer Science and Engineering<br>
+                                        Presidency University<br>
+                                        Bangalore, India
+                                    </div>
+                                
+                                </div>
+                            </div>
+
+                            <!-- Team Member 3 -->
+                            <div class="team-card">
+                                <div class="team-header">
+                                    <div class="team-avatar">SM</div>
+                                </div>
+                                <div class="team-info">
+                                    <div class="team-name">Sherlien Molly D</div>
+                                    <div class="team-role">Co-Researcher</div>
+                                    <div class="team-department">
+                                        Department of Computer Science and Engineering<br>
+                                        Presidency University<br>
+                                        Bangalore, India
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            <!-- Team Member 2 -->
+                            <div class="team-card">
+                                <div class="team-header">
+                                    <div class="team-avatar">NR</div>
+                                </div>
+                                <div class="team-info">
+                                    <div class="team-name">Navneeth Pandey</div>
+                                    <div class="team-role">Co-Researcher</div>
+                                    <div class="team-department">
+                                        School of Computer Science and Engineering<br>
+                                        Presidency University<br>
+                                        Bengaluru, India
+                                    </div>
+                                    
+                                </div>
+                            </div>
+
+                            
+
+                            
+                        </div>
+                    </section>
+
+                    <!-- Technology Stack -->
+                    <section class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-code"></i>
+                            Technology Stack
+                        </h2>
+                        <div class="card" style="padding: 30px;">
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px;">
+                                <div>
+                                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">
+                                        <i class="fas fa-database"></i> Backend
+                                    </h4>
+                                    <ul style="color: var(--text-secondary); line-height: 2;">
+                                        <li>PostgreSQL with PostGIS</li>
+                                        <li>R-tree Spatial Indexing</li>
+                                        <li>MQTT Protocol</li>
+                                        <li>Python Backend Services</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">
+                                        <i class="fas fa-laptop-code"></i> Frontend
+                                    </h4>
+                                    <ul style="color: var(--text-secondary); line-height: 2;">
+                                        <li>HTML5, CSS3, JavaScript</li>
+                                        <li>Leaflet.js for Maps</li>
+                                        <li>Chart.js for Analytics</li>
+                                        <li>Responsive Design</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">
+                                        <i class="fas fa-brain"></i> AI/ML
+                                    </h4>
+                                    <ul style="color: var(--text-secondary); line-height: 2;">
+                                        <li>Isolation Forest Algorithm</li>
+                                        <li>Anomaly Detection (94.2% precision)</li>
+                                        <li>Real-time Data Analysis</li>
+                                        <li>Predictive Maintenance</li>
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h4 style="color: var(--primary-color); margin-bottom: 15px;">
+                                        <i class="fas fa-shield-alt"></i> Security
+                                    </h4>
+                                    <ul style="color: var(--text-secondary); line-height: 2;">
+                                        <li>Role-based Access Control</li>
+                                        <li>MQTT Security</li>
+                                        <li>Data Encryption</li>
+                                        <li>Audit Logging</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Key Contributions -->
+                    <section class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-trophy"></i>
+                            Key Contributions
+                        </h2>
+                        <div class="card" style="padding: 30px;">
+                            <ol style="color: var(--text-secondary); line-height: 2; font-size: 15px;">
+                                <li style="margin-bottom: 15px;">
+                                    <strong style="color: var(--text-primary);">Design Validation:</strong> Validated the suitability of a cost-effective spatial database for geospatial water infrastructure management
+                                </li>
+                                <li style="margin-bottom: 15px;">
+                                    <strong style="color: var(--text-primary);">Algorithm Comparison:</strong> Implementation and comparison of real-time anomaly detection algorithms which discovers precision down to 2.1%
+                                </li>
+                                <li style="margin-bottom: 15px;">
+                                    <strong style="color: var(--text-primary);">IoT Framework:</strong> Development of an IoT Simulation Framework for testing without physical hardware deployment
+                                </li>
+                                <li>
+                                    <strong style="color: var(--text-primary);">Performance Analysis:</strong> Detailed performance evaluation proving scalability up to 50,000 users with 99.9% uptime
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- Contact & Affiliation -->
+                    <section class="section">
+                        <h2 class="section-title">
+                            <i class="fas fa-university"></i>
+                            Affiliation
+                        </h2>
+                        <div class="card" style="padding: 40px; text-align: center;">
+                            <h3 style="color: var(--primary-color); font-size: 24px; margin-bottom: 15px;">Presidency University</h3>
+                            <p style="color: var(--text-secondary); font-size: 16px; margin-bottom: 10px;">
+                                School of Computer Science and Engineering
+                            </p>
+                            <p style="color: var(--text-secondary); font-size: 16px; margin-bottom: 20px;">
+                                Bangalore, Karnataka, India
+                            </p>
+                            <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px;">
+                                <div style="text-align: center;">
+                                    <i class="fas fa-envelope" style="font-size: 24px; color: var(--primary-color); margin-bottom: 10px;"></i>
+                                    <p style="font-size: 14px; color: var(--text-secondary);">Contact for Collaboration</p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <i class="fas fa-book" style="font-size: 24px; color: var(--primary-color); margin-bottom: 10px;"></i>
+                                    <p style="font-size: 14px; color: var(--text-secondary);">Research Publication</p>
+                                </div>
+                                <div style="text-align: center;">
+                                    <i class="fas fa-flask" style="font-size: 24px; color: var(--primary-color); margin-bottom: 10px;"></i>
+                                    <p style="font-size: 14px; color: var(--text-secondary);">Ongoing Research</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Mobile menu toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        if (menuToggle && sidebar) {
+            menuToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+        }
+    </script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>

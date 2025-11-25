@@ -1,0 +1,121 @@
+version: '3.8'
+
+services:
+  # PostgreSQL with PostGIS
+  postgres:
+    image: postgis/postgis:14-3.3
+    container_name: jjm-postgres
+    environment:
+      POSTGRES_DB: jal_jeevan_db
+      POSTGRES_USER: jjm_admin
+      POSTGRES_PASSWORD: jjm_secure_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./backend/database/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - jjm-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jjm_admin"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis
+  redis:
+    image: redis:7-alpine
+    container_name: jjm-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    networks:
+      - jjm-network
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Mosquitto MQTT Broker
+  mosquitto:
+    image: eclipse-mosquitto:2
+    container_name: jjm-mosquitto
+    ports:
+      - "1883:1883"
+      - "9001:9001"
+    volumes:
+      - ./backend/mqtt/mosquitto.conf:/mosquitto/config/mosquitto.conf
+      - ./backend/mqtt/passwd:/mosquitto/config/passwd
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_logs:/mosquitto/log
+    networks:
+      - jjm-network
+    healthcheck:
+      test: ["CMD-SHELL", "mosquitto_sub -t '$$SYS/#' -C 1 | grep -v Error || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  # FastAPI Backend
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: jjm-backend
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: jal_jeevan_db
+      DB_USER: jjm_admin
+      DB_PASSWORD: jjm_secure_password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      MQTT_BROKER_HOST: mosquitto
+      MQTT_BROKER_PORT: 1883
+      MQTT_USERNAME: jjm_user
+      MQTT_PASSWORD: jjm_mqtt_password
+      SECRET_KEY: your-very-secure-secret-key-minimum-32-characters-long
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./backend:/app
+      - ml_models:/app/ml/models
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      mosquitto:
+        condition: service_started
+    networks:
+      - jjm-network
+    command: uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Nginx (Frontend + Reverse Proxy)
+  nginx:
+    image: nginx:alpine
+    container_name: jjm-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/usr/share/nginx/html
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+    depends_on:
+      - backend
+    networks:
+      - jjm-network
+
+networks:
+  jjm-network:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  redis_data:
+  mosquitto_data:
+  mosquitto_logs:
+  ml_models:

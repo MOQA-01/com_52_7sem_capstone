@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Citizen Portal - Jal Jeevan Mission</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            min-height: 100vh;
+        }
+
+        .citizen-header {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 20px 0;
+            color: white;
+        }
+
+        .citizen-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-area i {
+            font-size: 40px;
+            color: #60d5ff;
+        }
+
+        .logo-area h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            margin-left: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            opacity: 0.8;
+        }
+
+        .hero-banner {
+            text-align: center;
+            padding: 60px 20px;
+            color: white;
+        }
+
+        .hero-banner h2 {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .hero-banner p {
+            font-size: 20px;
+            opacity: 0.95;
+            margin-bottom: 30px;
+        }
+
+        .main-section {
+            padding: 40px 0;
+        }
+
+        .form-card {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-xl);
+            margin-bottom: 30px;
+        }
+
+        .form-card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--text-primary);
+        }
+
+        .form-card p {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .photo-upload {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--border-radius);
+            padding: 30px;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .photo-upload:hover {
+            border-color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.05);
+        }
+
+        .photo-upload i {
+            font-size: 48px;
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .photo-preview {
+            max-width: 200px;
+            max-height: 200px;
+            margin: 15px auto;
+            border-radius: var(--border-radius);
+        }
+
+        .faq-section {
+            margin-top: 40px;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            transition: var(--transition);
+        }
+
+        .faq-question:hover {
+            background: var(--bg-primary);
+        }
+
+        .faq-answer {
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.active .faq-answer {
+            padding: 0 20px 20px;
+            max-height: 300px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .track-section {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+        }
+
+        .track-input-group {
+            max-width: 500px;
+            margin: 30px auto;
+            display: flex;
+            gap: 10px;
+        }
+
+        .track-input-group input {
+            flex: 1;
+            padding: 15px 20px;
+            border: 2px solid var(--border-color);
+            border-radius: var(--border-radius);
+            font-size: 16px;
+        }
+
+        .timeline-visual {
+            display: flex;
+            justify-content: space-between;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .timeline-visual::before {
+            content: '';
+            position: absolute;
+            top: 25px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--border-color);
+            z-index: 0;
+        }
+
+        .timeline-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .timeline-step-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-primary);
+            border: 3px solid var(--border-color);
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            font-size: 20px;
+        }
+
+        .timeline-step.completed .timeline-step-icon {
+            background: var(--success-color);
+            border-color: var(--success-color);
+            color: white;
+        }
+
+        .timeline-step.active .timeline-step-icon {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .timeline-step-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+
+        .contact-section {
+            background: white;
+            border-radius: var(--border-radius-lg);
+            padding: 40px;
+            box-shadow: var(--shadow-xl);
+            margin-top: 30px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-color);
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .footer {
+            background: rgba(0, 0, 0, 0.2);
+            color: white;
+            text-align: center;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .hero-banner h2 {
+                font-size: 32px;
+            }
+
+            .hero-banner p {
+                font-size: 16px;
+            }
+
+            .form-card {
+                padding: 25px;
+            }
+
+            .timeline-visual {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .timeline-visual::before {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="citizen-header">
+        <div class="container">
+            <div class="logo-area">
+                <i class="fas fa-tint"></i>
+                <div>
+                    <h1>Jal Jeevan Mission</h1>
+                    <p style="font-size: 12px; margin: 0; opacity: 0.9;">Citizen Portal</p>
+                </div>
+            </div>
+            <nav class="nav-links">
+                <a href="#report">Report Issue</a>
+                <a href="#track">Track Complaint</a>
+                <a href="#faq">FAQs</a>
+                <a href="#contact">Contact</a>
+                <a href="about.html">About</a>
+                <a href="index.html">Admin Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero-banner">
+        <div class="container">
+            <h2>Report Water Supply Issues</h2>
+            <p>Help us serve you better by reporting water-related problems in your area</p>
+        </div>
+    </section>
+
+    <!-- Main Section -->
+    <section class="main-section">
+        <div class="container">
+            <!-- Report Issue Form -->
+            <div class="form-card" id="report">
+                <h3><i class="fas fa-edit"></i> Submit a Complaint</h3>
+                <p>Fill in the details below to register your water supply complaint</p>
+
+                <form id="complaintForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="citizenName">Full Name *</label>
+                            <input type="text" id="citizenName" required placeholder="Enter your full name">
+                        </div>
+                        <div class="form-group">
+                            <label for="citizenPhone">Phone Number *</label>
+                            <input type="tel" id="citizenPhone" required placeholder="10-digit mobile number">
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="citizenEmail">Email (Optional)</label>
+                            <input type="email" id="citizenEmail" placeholder="your.email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="complaintCategory">Issue Category *</label>
+                            <select id="complaintCategory" required>
+                                <option value="">Select category</option>
+                                <option value="leakage">Water Leakage</option>
+                                <option value="no_water">No Water Supply</option>
+                                <option value="quality">Water Quality Issue</option>
+                                <option value="billing">Billing Problem</option>
+                                <option value="pressure">Low Water Pressure</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complaintDescription">Description *</label>
+                        <textarea id="complaintDescription" required placeholder="Describe the issue in detail..." rows="4"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="complaintAddress">Complete Address *</label>
+                        <textarea id="complaintAddress" required placeholder="House No., Street, Locality, City, PIN Code" rows="2"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Location Coordinates (Optional)</label>
+                            <div style="display: flex; gap: 10px;">
+                                <input type="text" id="latitude" placeholder="Latitude" readonly>
+                                <input type="text" id="longitude" placeholder="Longitude" readonly>
+                                <button type="button" class="btn btn-secondary" onclick="getLocation()">
+                                    <i class="fas fa-location-crosshairs"></i> Use My Location
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Upload Photo (Optional)</label>
+                        <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <p>Click to upload a photo of the issue</p>
+                            <small style="color: var(--text-secondary);">Supported: JPG, PNG (Max 5MB)</small>
+                        </div>
+                        <input type="file" id="photoInput" accept="image/*" style="display: none;" onchange="previewPhoto(event)">
+                        <img id="photoPreview" class="photo-preview" style="display: none;">
+                    </div>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button type="submit" class="btn btn-primary" style="padding: 15px 50px; font-size: 16px;">
+                            <i class="fas fa-paper-plane"></i> Submit Complaint
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Track Complaint -->
+            <div class="track-section" id="track">
+                <h3><i class="fas fa-search"></i> Track Your Complaint</h3>
+                <p>Enter your complaint ID to check the status</p>
+
+                <div class="track-input-group">
+                    <input type="text" id="trackId" placeholder="Enter Complaint ID (e.g., GRV0001)">
+                    <button class="btn btn-primary" onclick="trackComplaint()">
+                        <i class="fas fa-search"></i> Track
+                    </button>
+                </div>
+
+                <div id="trackResult" style="display: none; margin-top: 30px; text-align: left;">
+                    <!-- Track result will be displayed here -->
+                </div>
+            </div>
+
+            <!-- FAQs -->
+            <div class="faq-section" id="faq">
+                <h2 style="text-align: center; color: white; margin-bottom: 30px;">Frequently Asked Questions</h2>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        How do I register a water supply complaint?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You can register a complaint by filling out the form above. Provide your details, select the issue category, describe the problem, and submit. You'll receive a unique complaint ID to track your complaint.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        How long does it take to resolve a complaint?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Resolution time depends on the nature and severity of the issue. Typically, critical issues like major leakages are addressed within 24 hours, while non-critical issues may take 3-5 working days.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        How can I track my complaint status?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Use the "Track Your Complaint" section above. Enter your complaint ID (provided when you registered the complaint) to see the current status and timeline.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        What should I do in case of emergency water issues?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        For emergency situations like major pipeline bursts or contaminated water supply, call our 24x7 helpline: 1800-XXX-XXXX immediately. You can also register a complaint online marking it as high priority.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        Can I submit anonymous complaints?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        While we accept complaints without full personal details, providing your contact information helps us update you about the resolution progress and contact you if additional information is needed.
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        What types of issues can I report?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        You can report various issues including water leakages, no water supply, poor water quality, billing discrepancies, low water pressure, and damaged water infrastructure in your area.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="contact-section" id="contact">
+                <h3><i class="fas fa-phone"></i> Contact Us</h3>
+                <p>Need help? Reach out to us through any of the following channels</p>
+
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div>
+                            <strong>24x7 Helpline</strong><br>
+                            <span style="color: var(--text-secondary);">1800-XXX-XXXX</span><br>
+                            <span style="color: var(--text-secondary); font-size: 12px;">Toll-free</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>
+                            <strong>Email Support</strong><br>
+                            <span style="color: var(--text-secondary);">support@jaljeevan.gov.in</span><br>
+                            <span style="color: var(--text-secondary); font-size: 12px;">Response within 24 hours</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div>
+                            <strong>Regional Office</strong><br>
+                            <span style="color: var(--text-secondary);">Bangalore Division</span><br>
+                            <span style="color: var(--text-secondary); font-size: 12px;">Karnataka, India</span>
+                        </div>
+                    </div>
+
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <strong>Office Hours</strong><br>
+                            <span style="color: var(--text-secondary);">Mon - Sat: 9 AM - 6 PM</span><br>
+                            <span style="color: var(--text-secondary); font-size: 12px;">Emergency: 24x7</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Jal Jeevan Mission - Ministry of Jal Shakti, Government of India</p>
+        <p>Har Ghar Jal - Water for All</p>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script>
+        // Handle complaint form submission
+        document.getElementById('complaintForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const newGrievance = {
+                id: `GRV${String(Math.floor(Math.random() * 10000)).padStart(4, '0')}`,
+                citizen: document.getElementById('citizenName').value,
+                phone: document.getElementById('citizenPhone').value,
+                category: document.getElementById('complaintCategory').value,
+                description: document.getElementById('complaintDescription').value,
+                location: {
+                    lat: parseFloat(document.getElementById('latitude').value) || 12.9716,
+                    lng: parseFloat(document.getElementById('longitude').value) || 77.5946,
+                    address: document.getElementById('complaintAddress').value
+                },
+                status: 'registered',
+                priority: 'medium',
+                assigned_to: null,
+                created_at: new Date().toISOString(),
+                timeline: [{
+                    status: 'registered',
+                    timestamp: new Date().toISOString(),
+                    by: 'Citizen Portal'
+                }],
+                comments: []
+            };
+
+            DataManager.addGrievance(newGrievance);
+
+            alert(`Complaint Registered Successfully!\n\nYour Complaint ID: ${newGrievance.id}\n\nPlease save this ID to track your complaint status.\n\nYou will be contacted within 24-48 hours.`);
+
+            this.reset();
+            document.getElementById('photoPreview').style.display = 'none';
+            document.getElementById('latitude').value = '';
+            document.getElementById('longitude').value = '';
+        });
+
+        // Get user location
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    document.getElementById('latitude').value = position.coords.latitude.toFixed(6);
+                    document.getElementById('longitude').value = position.coords.longitude.toFixed(6);
+                    alert('Location captured successfully!');
+                }, function(error) {
+                    alert('Unable to get location. Please enter manually or allow location access.');
+                });
+            } else {
+                alert('Geolocation is not supported by your browser.');
+            }
+        }
+
+        // Preview uploaded photo
+        function previewPhoto(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const preview = document.getElementById('photoPreview');
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Track complaint
+        function trackComplaint() {
+            const trackId = document.getElementById('trackId').value.trim().toUpperCase();
+            if (!trackId) {
+                alert('Please enter a complaint ID');
+                return;
+            }
+
+            const grievances = DataManager.getGrievances();
+            const grievance = grievances.find(g => g.id === trackId);
+
+            const resultDiv = document.getElementById('trackResult');
+
+            if (!grievance) {
+                resultDiv.innerHTML = `
+                    <div class="alert alert-error">
+                        <i class="fas fa-times-circle"></i> Complaint ID "${trackId}" not found. Please check and try again.
+                    </div>
+                `;
+                resultDiv.style.display = 'block';
+                return;
+            }
+
+            const statusMap = {
+                registered: { step: 0, label: 'Registered', completed: true },
+                assigned: { step: 1, label: 'Assigned', completed: true },
+                in_progress: { step: 2, label: 'In Progress', completed: true },
+                resolved: { step: 3, label: 'Resolved', completed: true }
+            };
+
+            const currentStatus = statusMap[grievance.status];
+
+            resultDiv.innerHTML = `
+                <div class="alert alert-success">
+                    <i class="fas fa-check-circle"></i> Complaint found!
+                </div>
+
+                <div style="background: var(--bg-primary); padding: 20px; border-radius: 12px; margin: 20px 0;">
+                    <h4 style="margin-bottom: 15px;">Complaint Details</h4>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; font-size: 14px;">
+                        <div><strong>ID:</strong> ${grievance.id}</div>
+                        <div><strong>Category:</strong> ${grievance.category.replace('_', ' ').toUpperCase()}</div>
+                        <div><strong>Status:</strong> <span class="badge badge-${currentStatus.step === 3 ? 'success' : 'warning'}">${currentStatus.label}</span></div>
+                        <div><strong>Registered:</strong> ${new Date(grievance.created_at).toLocaleDateString()}</div>
+                    </div>
+                </div>
+
+                <div class="timeline-visual">
+                    <div class="timeline-step ${currentStatus.step >= 0 ? 'completed' : ''}">
+                        <div class="timeline-step-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <div class="timeline-step-label">Registered</div>
+                    </div>
+                    <div class="timeline-step ${currentStatus.step >= 1 ? 'completed' : currentStatus.step === 0 ? 'active' : ''}">
+                        <div class="timeline-step-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <div class="timeline-step-label">Assigned</div>
+                    </div>
+                    <div class="timeline-step ${currentStatus.step >= 2 ? 'completed' : currentStatus.step === 1 ? 'active' : ''}">
+                        <div class="timeline-step-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <div class="timeline-step-label">In Progress</div>
+                    </div>
+                    <div class="timeline-step ${currentStatus.step >= 3 ? 'completed' : currentStatus.step === 2 ? 'active' : ''}">
+                        <div class="timeline-step-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="timeline-step-label">Resolved</div>
+                    </div>
+                </div>
+
+                ${grievance.assigned_to ? `
+                    <div class="alert alert-info">
+                        <i class="fas fa-user"></i> Assigned to: <strong>${grievance.assigned_to}</strong>
+                    </div>
+                ` : ''}
+
+                ${currentStatus.step < 3 ? `
+                    <div class="alert alert-warning">
+                        <i class="fas fa-clock"></i> Estimated resolution: 3-5 working days
+                    </div>
+                ` : `
+                    <div class="alert alert-success">
+                        <i class="fas fa-check-circle"></i> This complaint has been resolved. Thank you for your patience!
+                    </div>
+                `}
+            `;
+
+            resultDiv.style.display = 'block';
+        }
+
+        // Toggle FAQ
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+
+            // Close all FAQs
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Open clicked FAQ if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

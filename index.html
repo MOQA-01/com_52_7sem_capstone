@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jal Jeevan Mission - Water Supply Network Management</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="landing-page">
+    <!-- Animated Background -->
+    <div class="water-drops">
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+        <div class="drop"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="landing-header">
+        <div class="container">
+            <div class="logo-section">
+                <i class="fas fa-tint logo-icon"></i>
+                <div>
+                    <h1>Jal Jeevan Mission</h1>
+                    <p class="tagline">Har Ghar Jal - Water for All</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h2 class="hero-title">Integrated Geospatial, IoT & Grievance Platform</h2>
+                    <p class="hero-subtitle">Smart Water Supply Network Management System</p>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="125000">0</div>
+                            <div class="stat-label">Assets Mapped</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="3450">0</div>
+                            <div class="stat-label">IoT Sensors</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="15000">0</div>
+                            <div class="stat-label">Complaints Resolved</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" data-target="98">0</div>
+                            <div class="stat-label">% Uptime</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Login Card -->
+                <div class="login-card glass-card">
+                    <h3><i class="fas fa-sign-in-alt"></i> Login to Dashboard</h3>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="username">
+                                <i class="fas fa-user"></i> Username
+                            </label>
+                            <input type="text" id="username" name="username" placeholder="Enter username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">
+                                <i class="fas fa-lock"></i> Password
+                            </label>
+                            <input type="password" id="password" name="password" placeholder="Enter password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">
+                                <i class="fas fa-user-tag"></i> Login As
+                            </label>
+                            <select id="role" name="role" required>
+                                <option value="admin">Admin</option>
+                                <option value="engineer">Engineer</option>
+                                <option value="official">Official</option>
+                                <option value="citizen">Citizen</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </button>
+                    </form>
+
+                    <div class="demo-credentials">
+                        <p><strong>Demo Credentials:</strong></p>
+                        <ul>
+                            <li><code>admin / admin123</code> - Full Access</li>
+                            <li><code>engineer / eng123</code> - Field Operations</li>
+                            <li><code>official / off123</code> - Monitoring</li>
+                            <li><code>citizen / citizen123</code> - Public View</li>
+                        </ul>
+                    </div>
+
+                    <div class="citizen-portal-link">
+                        <p>Don't have an account?</p>
+                        <a href="citizen-portal.html" class="text-link">
+                            <i class="fas fa-external-link-alt"></i> Report Issue as Guest
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Overview -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Platform Capabilities</h2>
+            <div class="features-grid">
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Geospatial Mapping</h3>
+                    <p>Interactive maps with real-time asset tracking, pipeline networks, and infrastructure visualization</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-satellite-dish"></i>
+                    </div>
+                    <h3>IoT Monitoring</h3>
+                    <p>Live sensor data for flow, pressure, quality monitoring with anomaly detection</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <h3>Grievance Management</h3>
+                    <p>Streamlined complaint registration, tracking, and resolution workflow</p>
+                </div>
+                <div class="feature-card glass-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Analytics & Reports</h3>
+                    <p>Comprehensive dashboards with insights, trends, and performance metrics</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="landing-footer">
+        <div class="container">
+            <p>&copy; 2025 Jal Jeevan Mission - Ministry of Jal Shakti, Government of India</p>
+            <p>Integrated Water Supply Network Management Platform (Prototype)</p>
+        </div>
+    </footer>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script>
+        // Animated counter for statistics
+        function animateCounter(element) {
+            const target = parseInt(element.getAttribute('data-target'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString();
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        }
+
+        // Trigger animation when page loads
+        window.addEventListener('load', () => {
+            document.querySelectorAll('.stat-number').forEach(element => {
+                animateCounter(element);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+INFO:     Will watch for changes in these directories: ['/Users/moqa/Desktop/gis/jal-jeevan-platform/backend']
+INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [60765] using WatchFiles
+INFO:     Started server process [60769]
+INFO:     Waiting for application startup.
+2025-11-25 22:38:43,728 - main - INFO - Starting Jal Jeevan Mission Platform...
+2025-11-25 22:38:43,728 - mqtt.mqtt_client - ERROR - Failed to connect to MQTT broker: A client id must be provided if clean session is False.
+2025-11-25 22:38:43,728 - main - ERROR - Startup error: A client id must be provided if clean session is False.
+ERROR:    Traceback (most recent call last):
+  File "/Users/moqa/Desktop/gis/jal-jeevan-platform/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
+    async with self.lifespan_context(app) as maybe_state:
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/contextlib.py", line 204, in __aenter__
+    return await anext(self.gen)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/moqa/Desktop/gis/jal-jeevan-platform/backend/main.py", line 44, in lifespan
+    await mqtt_client.connect()
+  File "/Users/moqa/Desktop/gis/jal-jeevan-platform/backend/mqtt/mqtt_client.py", line 26, in connect
+    self.client = aiomqtt.Client(
+                  ^^^^^^^^^^^^^^^
+  File "/Users/moqa/Desktop/gis/jal-jeevan-platform/backend/venv/lib/python3.11/site-packages/aiomqtt/client.py", line 401, in __init__
+    self._client: mqtt.Client = mqtt.Client(
+                                ^^^^^^^^^^^^
+  File "/Users/moqa/Desktop/gis/jal-jeevan-platform/backend/venv/lib/python3.11/site-packages/paho/mqtt/client.py", line 547, in __init__
+    raise ValueError(
+ValueError: A client id must be provided if clean session is False.
+
+ERROR:    Application startup failed. Exiting.
+INFO:     Stopping reloader process [60765]

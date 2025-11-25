@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(chmod:*)",
+      "Bash(source venv/bin/activate)",
+      "Bash(python:*)",
+      "Bash(cat:*)",
+      "Bash(pip install \"pydantic[email]\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

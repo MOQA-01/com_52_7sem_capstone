@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Jal Jeevan Mission</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="sidebar-logo">
+                    <i class="fas fa-tint"></i>
+                    <div class="sidebar-logo-text">
+                        <h2>Jal Jeevan</h2>
+                        <p>Water Management</p>
+                    </div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Main Menu</div>
+                <a href="dashboard.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span class="nav-item-text">Dashboard</span>
+                </a>
+                <a href="map.html" class="nav-item">
+                    <i class="fas fa-map-marked-alt"></i>
+                    <span class="nav-item-text">Geospatial Map</span>
+                </a>
+                <a href="iot-monitoring.html" class="nav-item">
+                    <i class="fas fa-satellite-dish"></i>
+                    <span class="nav-item-text">IoT Monitoring</span>
+                    <span class="nav-badge">12</span>
+                </a>
+                <a href="grievances.html" class="nav-item">
+                    <i class="fas fa-comments"></i>
+                    <span class="nav-item-text">Grievances</span>
+                    <span class="nav-badge">234</span>
+                </a>
+                <a href="analytics.html" class="nav-item">
+                    <i class="fas fa-chart-line"></i>
+                    <span class="nav-item-text">Analytics</span>
+                </a>
+
+                <div class="nav-section-title">Quick Access</div>
+                <a href="citizen-portal.html" class="nav-item">
+                    <i class="fas fa-user"></i>
+                    <span class="nav-item-text">Citizen Portal</span>
+                </a>
+
+                <div class="nav-section-title">Information</div>
+                <a href="about.html" class="nav-item">
+                    <i class="fas fa-info-circle"></i>
+                    <span class="nav-item-text">About Project</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Navbar -->
+            <nav class="top-navbar">
+                <div class="navbar-left">
+                    <button class="menu-toggle" id="menuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <h1 class="page-title">Dashboard Overview</h1>
+                </div>
+                <div class="navbar-right">
+                    <div class="search-box">
+                        <input type="text" placeholder="Search assets, complaints...">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <button class="navbar-icon" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge" id="notificationCount">12</span>
+                    </button>
+                    <div class="user-profile" id="userProfile">
+                        <div class="user-avatar">AD</div>
+                        <div class="user-info">
+                            <div class="user-name" id="userName">Admin User</div>
+                            <div class="user-role" id="userRole">Administrator</div>
+                        </div>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <button class="navbar-icon" onclick="logout()" title="Logout">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </button>
+                </div>
+            </nav>
+
+            <!-- Dashboard Content -->
+            <div class="dashboard-content">
+                <!-- Stats Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon primary">
+                                <i class="fas fa-map-marked"></i>
+                            </div>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>12%</span>
+                            </div>
+                        </div>
+                        <div class="stat-value" id="totalAssets">125,000</div>
+                        <div class="stat-label">Total Assets Mapped</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon success">
+                                <i class="fas fa-satellite-dish"></i>
+                            </div>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>8%</span>
+                            </div>
+                        </div>
+                        <div class="stat-value" id="activeSensors">3,450</div>
+                        <div class="stat-label">Active IoT Sensors</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon warning">
+                                <i class="fas fa-exclamation-triangle"></i>
+                            </div>
+                            <div class="stat-trend down">
+                                <i class="fas fa-arrow-down"></i>
+                                <span>5%</span>
+                            </div>
+                        </div>
+                        <div class="stat-value" id="openComplaints">234</div>
+                        <div class="stat-label">Open Complaints</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon danger">
+                                <i class="fas fa-bell"></i>
+                            </div>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span>3</span>
+                            </div>
+                        </div>
+                        <div class="stat-value" id="anomalies">12</div>
+                        <div class="stat-label">Anomalies Detected</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-card-header">
+                            <div class="stat-icon info">
+                                <i class="fas fa-check-circle"></i>
+                            </div>
+                            <div class="stat-trend up">
+                                <i class="fas fa-arrow-up"></i>
+                                <span id="resolvedTrend">0%</span>
+                            </div>
+                        </div>
+                        <div class="stat-value" id="resolvedComplaints">0</div>
+                        <div class="stat-label">Resolved This Month</div>
+                    </div>
+                </div>
+
+                <!-- Grievance Statistics Cards -->
+                <div class="stats-grid" style="margin-top: 20px;">
+                    <div class="stat-card" style="background: linear-gradient(135deg, rgba(239, 68, 68, 0.1) 0%, rgba(220, 38, 38, 0.05) 100%); border-left: 4px solid #ef4444;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div class="stat-value" id="leakageCount" style="color: #ef4444; font-size: 32px;">0</div>
+                                <div class="stat-label">Water Leakage Issues</div>
+                            </div>
+                            <i class="fas fa-tint" style="font-size: 36px; color: rgba(239, 68, 68, 0.3);"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%); border-left: 4px solid #3b82f6;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div class="stat-value" id="noWaterCount" style="color: #3b82f6; font-size: 32px;">0</div>
+                                <div class="stat-label">No Water Supply</div>
+                            </div>
+                            <i class="fas fa-water" style="font-size: 36px; color: rgba(59, 130, 246, 0.3);"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" style="background: linear-gradient(135deg, rgba(139, 92, 246, 0.1) 0%, rgba(124, 58, 237, 0.05) 100%); border-left: 4px solid #8b5cf6;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div class="stat-value" id="qualityCount" style="color: #8b5cf6; font-size: 32px;">0</div>
+                                <div class="stat-label">Water Quality Issues</div>
+                            </div>
+                            <i class="fas fa-vial" style="font-size: 36px; color: rgba(139, 92, 246, 0.3);"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" style="background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%); border-left: 4px solid #f59e0b;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div class="stat-value" id="pressureCount" style="color: #f59e0b; font-size: 32px;">0</div>
+                                <div class="stat-label">Low Pressure Issues</div>
+                            </div>
+                            <i class="fas fa-gauge-high" style="font-size: 36px; color: rgba(245, 158, 11, 0.3);"></i>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.05) 100%); border-left: 4px solid #10b981;">
+                        <div style="display: flex; align-items: center; justify-content: space-between;">
+                            <div>
+                                <div class="stat-value" id="avgResponseTime" style="color: #10b981; font-size: 32px;">0h</div>
+                                <div class="stat-label">Avg Response Time</div>
+                            </div>
+                            <i class="fas fa-clock" style="font-size: 36px; color: rgba(16, 185, 129, 0.3);"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="content-grid">
+                    <!-- Recent Activities -->
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">
+                                <i class="fas fa-history"></i>
+                                Recent Activities
+                            </h3>
+                            <a href="grievances.html" class="btn btn-sm btn-primary">View All</a>
+                        </div>
+                        <div id="activityFeed">
+                            <!-- Activities will be loaded here -->
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Quick Actions + Critical Alerts -->
+                    <div style="display: flex; flex-direction: column; gap: 20px;">
+                        <!-- Quick Actions (Half Size) -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-bolt"></i>
+                                    Quick Actions
+                                </h3>
+                            </div>
+                            <div class="quick-actions">
+                                <a href="map.html" class="action-btn">
+                                    <i class="fas fa-plus-circle"></i>
+                                    <span>Add Asset</span>
+                                </a>
+                                <a href="citizen-portal.html" class="action-btn">
+                                    <i class="fas fa-flag"></i>
+                                    <span>Report Issue</span>
+                                </a>
+                                <a href="iot-monitoring.html" class="action-btn">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    <span>View Alerts</span>
+                                </a>
+                                <a href="analytics.html" class="action-btn">
+                                    <i class="fas fa-download"></i>
+                                    <span>Export Data</span>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Critical Alerts (Below Quick Actions) -->
+                        <div class="card">
+                            <div class="card-header">
+                                <h3 class="card-title">
+                                    <i class="fas fa-exclamation-circle"></i>
+                                    Critical Alerts
+                                </h3>
+                                <a href="iot-monitoring.html" class="btn btn-sm btn-danger">View All</a>
+                            </div>
+                            <div id="criticalAlerts">
+                                <!-- Alerts will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Preview (Full Width) -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-map"></i>
+                            Asset Distribution Map
+                        </h3>
+                        <a href="map.html" class="btn btn-sm btn-primary">Full Map</a>
+                    </div>
+                    <div id="miniMap" class="mini-map" style="min-height: 500px;">
+                        <!-- Asset distribution visualization will load here -->
+                    </div>
+                </div>
+
+                <!-- System Status -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <i class="fas fa-info-circle"></i>
+                            System Status
+                        </h3>
+                        <div class="card-actions">
+                            <span class="badge badge-success">All Systems Operational</span>
+                            <span id="currentTime" style="font-size: 13px; color: var(--text-secondary);"></span>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        <div style="padding: 15px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 13px; color: var(--text-secondary);">Database</span>
+                                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                            </div>
+                            <div style="font-size: 18px; font-weight: 600; margin-top: 5px;">Online</div>
+                        </div>
+                        <div style="padding: 15px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 13px; color: var(--text-secondary);">IoT Gateway</span>
+                                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                            </div>
+                            <div style="font-size: 18px; font-weight: 600; margin-top: 5px;">Connected</div>
+                        </div>
+                        <div style="padding: 15px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 13px; color: var(--text-secondary);">API Server</span>
+                                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                            </div>
+                            <div style="font-size: 18px; font-weight: 600; margin-top: 5px;">Running</div>
+                        </div>
+                        <div style="padding: 15px; background: rgba(16, 185, 129, 0.1); border-radius: 8px;">
+                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                <span style="font-size: 13px; color: var(--text-secondary);">Map Service</span>
+                                <i class="fas fa-check-circle" style="color: var(--success-color);"></i>
+                            </div>
+                            <div style="font-size: 18px; font-weight: 600; margin-top: 5px;">Active</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Auto-login for testing (creates mock session) -->
+    <script src="js/auto-login.js"></script>
+
+    <script src="js/data.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/notifications.js"></script>
+</body>
+</html>

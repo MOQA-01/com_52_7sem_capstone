@@ -1,0 +1,495 @@
+/* ===================================
+   Responsive Design
+   =================================== */
+
+/* Tablet (768px - 1024px) */
+@media (max-width: 1024px) {
+    .hero-content {
+        grid-template-columns: 1fr;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        width: 220px;
+    }
+
+    .main-content {
+        margin-left: 220px;
+    }
+}
+
+/* Mobile (max-width: 768px) */
+@media (max-width: 768px) {
+    /* Layout */
+    .sidebar {
+        transform: translateX(-100%);
+        width: 260px;
+        position: fixed;
+        z-index: 10000;
+    }
+
+    .sidebar.active {
+        transform: translateX(0);
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    /* Navbar */
+    .top-navbar {
+        padding: 12px 15px;
+    }
+
+    .page-title {
+        font-size: 18px;
+    }
+
+    .search-box {
+        display: none;
+    }
+
+    .user-info {
+        display: none;
+    }
+
+    .navbar-right {
+        gap: 10px;
+    }
+
+    /* Dashboard */
+    .dashboard-content {
+        padding: 15px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .stat-value {
+        font-size: 24px;
+    }
+
+    .stat-label {
+        font-size: 11px;
+    }
+
+    /* Cards */
+    .card {
+        padding: 15px;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* Tables */
+    .table-container {
+        padding: 15px;
+        overflow-x: auto;
+    }
+
+    table {
+        font-size: 12px;
+    }
+
+    th, td {
+        padding: 8px 6px;
+        white-space: nowrap;
+    }
+
+    /* Forms */
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-section {
+        flex-direction: column;
+        padding: 15px;
+    }
+
+    .filter-controls {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .filter-item {
+        width: 100%;
+    }
+
+    .filter-item select,
+    .filter-item input {
+        width: 100%;
+    }
+
+    /* Modals */
+    .modal-content {
+        width: 95%;
+        margin: 10% auto;
+    }
+
+    .modal-body {
+        padding: 20px;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Charts */
+    .charts-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+
+    /* Landing Page */
+    .hero-title {
+        font-size: 28px;
+    }
+
+    .hero-subtitle {
+        font-size: 14px;
+    }
+
+    .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .stat-number {
+        font-size: 24px;
+    }
+
+    .stat-label {
+        font-size: 11px;
+    }
+
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .login-card {
+        padding: 25px;
+    }
+
+    /* Map Page */
+    .map-controls {
+        top: 10px;
+        left: 10px;
+        max-width: calc(100% - 20px);
+    }
+
+    .control-panel {
+        max-width: 100%;
+    }
+
+    .legend {
+        bottom: 10px;
+        right: 10px;
+        max-width: 180px;
+        padding: 12px;
+    }
+
+    .legend-item {
+        font-size: 11px;
+    }
+
+    /* IoT Monitoring */
+    .sensors-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .sensor-card {
+        padding: 15px;
+    }
+
+    /* Grievances */
+    .grievance-stats {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 12px;
+    }
+
+    /* Analytics */
+    .analytics-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .date-selector {
+        flex-wrap: wrap;
+    }
+
+    .date-btn {
+        flex: 1;
+        min-width: 80px;
+    }
+
+    .insights-grid {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 12px;
+    }
+
+    .insight-value {
+        font-size: 24px;
+    }
+
+    /* Citizen Portal */
+    .hero-banner {
+        padding: 40px 20px;
+    }
+
+    .hero-banner h2 {
+        font-size: 28px;
+    }
+
+    .hero-banner p {
+        font-size: 14px;
+    }
+
+    .form-card {
+        padding: 20px;
+    }
+
+    .track-section {
+        padding: 25px 20px;
+    }
+
+    .track-input-group {
+        flex-direction: column;
+    }
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Buttons */
+    .btn {
+        font-size: 13px;
+        padding: 10px 18px;
+    }
+
+    .btn-block {
+        width: 100%;
+    }
+
+    /* Timeline */
+    .timeline-visual {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .timeline-visual::before {
+        display: none;
+    }
+
+    .timeline-step {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        text-align: left;
+    }
+
+    .timeline-step-icon {
+        margin: 0;
+    }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+    .hero-title {
+        font-size: 24px;
+    }
+
+    .hero-subtitle {
+        font-size: 13px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .stat-card {
+        padding: 15px;
+    }
+
+    .login-card {
+        padding: 20px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        font-size: 16px; /* Prevent zoom on iOS */
+    }
+
+    .modal-content {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        border-radius: 0;
+        max-height: 100vh;
+    }
+
+    .modal-header {
+        border-radius: 0;
+    }
+
+    .navbar-icon {
+        font-size: 18px;
+        padding: 8px;
+    }
+
+    .user-avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 10px 15px;
+        font-size: 12px;
+    }
+
+    h1, .page-title {
+        font-size: 16px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    h3 {
+        font-size: 16px;
+    }
+}
+
+/* Touch-friendly adjustments */
+@media (hover: none) and (pointer: coarse) {
+    .btn,
+    .navbar-icon,
+    .nav-item,
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    .layer-toggle,
+    .faq-question {
+        min-height: 44px;
+    }
+
+    input[type="checkbox"] {
+        min-width: 24px;
+        min-height: 24px;
+    }
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .top-navbar,
+    .btn,
+    .navbar-icon,
+    .menu-toggle,
+    .filters-section,
+    .analytics-header .date-selector,
+    .analytics-header .btn {
+        display: none !important;
+    }
+
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .dashboard-content {
+        padding: 0;
+    }
+
+    .card,
+    .chart-card {
+        break-inside: avoid;
+        page-break-inside: avoid;
+    }
+
+    body {
+        background: white;
+    }
+
+    @page {
+        margin: 1cm;
+    }
+}
+
+/* Dark Mode Support (Optional) */
+@media (prefers-color-scheme: dark) {
+    /* Uncomment to enable dark mode */
+    /*
+    :root {
+        --bg-primary: #1e293b;
+        --bg-secondary: #0f172a;
+        --text-primary: #f1f5f9;
+        --text-secondary: #cbd5e1;
+        --border-color: #334155;
+    }
+
+    body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+    }
+
+    .glass-card,
+    .card,
+    .table-container,
+    input,
+    select,
+    textarea {
+        background: var(--bg-secondary);
+        color: var(--text-primary);
+        border-color: var(--border-color);
+    }
+    */
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    .btn {
+        border: 2px solid currentColor;
+    }
+
+    .card {
+        border: 1px solid var(--border-color);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+
+    .drop,
+    .spinner,
+    .anomaly-badge {
+        animation: none !important;
+    }
+}
