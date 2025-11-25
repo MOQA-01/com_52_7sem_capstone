@@ -5,7 +5,14 @@
       "Bash(source venv/bin/activate)",
       "Bash(python:*)",
       "Bash(cat:*)",
-      "Bash(pip install \"pydantic[email]\")"
+      "Bash(pip install \"pydantic[email]\")",
+      "Bash(brew services:*)",
+      "Bash(psql:*)",
+      "Bash(brew install:*)",
+      "Bash(brew info:*)",
+      "Bash(brew unlink:*)",
+      "Bash(brew tap:*)",
+      "Bash(brew search:*)"
     ],
     "deny": [],
     "ask": []

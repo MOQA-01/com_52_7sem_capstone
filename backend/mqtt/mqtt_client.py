@@ -29,6 +29,7 @@ class MQTTClient:
                 username=settings.MQTT_USERNAME,
                 password=settings.MQTT_PASSWORD,
                 keepalive=settings.MQTT_KEEPALIVE,
+                client_id="jjm_backend_client",  # Required for persistent session
                 clean_session=False,  # Persistent session
                 protocol=aiomqtt.ProtocolVersion.V311
             )

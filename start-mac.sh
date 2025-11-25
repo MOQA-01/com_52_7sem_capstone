@@ -32,18 +32,21 @@ fi
 
 # Check and start PostgreSQL
 echo -e "${BLUE}Checking PostgreSQL...${NC}"
-if ! brew services list | grep postgresql@14 | grep started > /dev/null 2>&1; then
+if ! brew services list | grep postgresql@17 | grep started > /dev/null 2>&1; then
     if command -v pg_ctl &> /dev/null; then
         echo -e "${YELLOW}Starting PostgreSQL...${NC}"
-        brew services start postgresql@14
+        brew services start postgresql@17
         sleep 3
     else
         echo -e "${RED}✗ PostgreSQL not installed!${NC}"
-        echo -e "${YELLOW}Run: brew install postgresql@14 postgis${NC}"
+        echo -e "${YELLOW}Run: brew install postgresql@17 postgis${NC}"
         exit 1
     fi
 fi
 echo -e "${GREEN}✓ PostgreSQL is running${NC}"
+
+# Set PostgreSQL 17 in PATH
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
 
 # Check and start Redis
 echo -e "${BLUE}Checking Redis...${NC}"
@@ -111,15 +114,16 @@ fi
 
 # Check database
 echo -e "${BLUE}Checking database...${NC}"
-if ! psql -lqt | cut -d \| -f 1 | grep -qw jal_jeevan_db; then
+export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"
+if ! /opt/homebrew/opt/postgresql@17/bin/psql -lqt 2>/dev/null | cut -d \| -f 1 | grep -qw jal_jeevan_db; then
     echo -e "${YELLOW}! Database not found, creating...${NC}"
-    createdb jal_jeevan_db
-    psql jal_jeevan_db -c "CREATE EXTENSION IF NOT EXISTS postgis;" > /dev/null 2>&1
-    psql jal_jeevan_db -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";" > /dev/null 2>&1
+    /opt/homebrew/opt/postgresql@17/bin/createdb jal_jeevan_db
+    /opt/homebrew/opt/postgresql@17/bin/psql jal_jeevan_db -c "CREATE EXTENSION IF NOT EXISTS postgis;" > /dev/null 2>&1
+    /opt/homebrew/opt/postgresql@17/bin/psql jal_jeevan_db -c "CREATE EXTENSION IF NOT EXISTS \"uuid-ossp\";" > /dev/null 2>&1
 
     if [ -f "database/schema.sql" ]; then
         echo -e "${BLUE}Loading database schema...${NC}"
-        psql jal_jeevan_db < database/schema.sql > /dev/null 2>&1
+        /opt/homebrew/opt/postgresql@17/bin/psql jal_jeevan_db < database/schema.sql > /dev/null 2>&1
         echo -e "${GREEN}✓ Database created and schema loaded${NC}"
     fi
 else

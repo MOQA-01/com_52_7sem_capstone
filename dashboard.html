@@ -89,10 +89,21 @@
                             <div class="user-role" id="userRole">Administrator</div>
                         </div>
                         <i class="fas fa-chevron-down"></i>
+
+                        <!-- User Dropdown Menu -->
+                        <div class="user-dropdown" id="userDropdown">
+                            <div class="dropdown-menu">
+                                <a href="index.html" class="dropdown-item">
+                                    <i class="fas fa-sign-in-alt"></i>
+                                    <span>Login</span>
+                                </a>
+                                <div class="dropdown-item logout" onclick="logout()">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <span>Logout</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <button class="navbar-icon" onclick="logout()" title="Logout">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </button>
                 </div>
             </nav>
 
@@ -354,5 +365,35 @@
     <script src="js/auth.js"></script>
     <script src="js/dashboard.js"></script>
     <script src="js/notifications.js"></script>
+
+    <script>
+        // User Profile Dropdown Toggle
+        const userProfile = document.getElementById('userProfile');
+        const userDropdown = document.getElementById('userDropdown');
+
+        userProfile.addEventListener('click', function(e) {
+            e.stopPropagation();
+            userDropdown.classList.toggle('show');
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!userProfile.contains(e.target)) {
+                userDropdown.classList.remove('show');
+            }
+        });
+
+        // Logout function
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                // Clear session storage
+                sessionStorage.clear();
+                localStorage.clear();
+
+                // Redirect to login page
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
 </body>
 </html>

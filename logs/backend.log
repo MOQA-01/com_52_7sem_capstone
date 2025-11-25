@@ -1,11 +1,11 @@
 INFO:     Will watch for changes in these directories: ['/Users/moqa/Desktop/gis/jal-jeevan-platform/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [60765] using WatchFiles
-INFO:     Started server process [60769]
+INFO:     Started reloader process [97140] using WatchFiles
+INFO:     Started server process [97144]
 INFO:     Waiting for application startup.
-2025-11-25 22:38:43,728 - main - INFO - Starting Jal Jeevan Mission Platform...
-2025-11-25 22:38:43,728 - mqtt.mqtt_client - ERROR - Failed to connect to MQTT broker: A client id must be provided if clean session is False.
-2025-11-25 22:38:43,728 - main - ERROR - Startup error: A client id must be provided if clean session is False.
+2025-11-26 02:55:32,549 - main - INFO - Starting Jal Jeevan Mission Platform...
+2025-11-26 02:55:32,549 - mqtt.mqtt_client - ERROR - Failed to connect to MQTT broker: A client id must be provided if clean session is False.
+2025-11-26 02:55:32,549 - main - ERROR - Startup error: A client id must be provided if clean session is False.
 ERROR:    Traceback (most recent call last):
   File "/Users/moqa/Desktop/gis/jal-jeevan-platform/backend/venv/lib/python3.11/site-packages/starlette/routing.py", line 677, in lifespan
     async with self.lifespan_context(app) as maybe_state:
@@ -25,4 +25,14 @@ ERROR:    Traceback (most recent call last):
 ValueError: A client id must be provided if clean session is False.
 
 ERROR:    Application startup failed. Exiting.
-INFO:     Stopping reloader process [60765]
+WARNING:  WatchFiles detected changes in 'mqtt/mqtt_client.py'. Reloading...
+INFO:     Started server process [97263]
+INFO:     Waiting for application startup.
+2025-11-26 02:56:26,063 - main - INFO - Starting Jal Jeevan Mission Platform...
+2025-11-26 02:56:26,088 - main - WARNING - No ML model found. Train a model first.
+2025-11-26 02:56:26,088 - main - INFO - Platform started successfully
+2025-11-26 02:56:26,088 - mqtt.mqtt_client - ERROR - Error in MQTT listener: 'async for' requires an object with __aiter__ method, got method
+INFO:     Application startup complete.
+INFO:     127.0.0.1:60691 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60744 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60820 - "GET /docs HTTP/1.1" 200 OK
