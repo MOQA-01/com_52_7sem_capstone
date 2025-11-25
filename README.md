@@ -4,7 +4,8 @@
 
 A fully functional prototype of an Integrated Geospatial, IoT, and Grievance Redressal Platform for Water Supply Network Management. This platform demonstrates the capabilities of the Jal Jeevan Mission initiative using only **HTML, CSS, and vanilla JavaScript** with no backend required.
 
-![Platform Screenshot](https://via.placeholder.com/800x400?text=Jal+Jeevan+Mission+Platform)
+![Uploading Jal Jeevan Mission - Water Supply Network Management.png…]()
+
 
 ## ✨ Key Features
 
